@@ -1,0 +1,92 @@
+<ion-view cache-view="false" title="Familia Daabon" id="tweets">
+<ion-nav-bar class="bar-positive">
+<ion-nav-buttons side="right">
+<a nav-transition="ios" href="#/tab/new-tweet"><button class="button">
+  <i class="icon ion-plus-round"></i>
+</button></a>
+</ion-nav-buttons>
+<ion-nav-buttons side="left">
+<!--<button class="button" ng-click="refresh()">
+  <i class="icon ion-loop"></i>
+</button>-->
+    <a href="#/tab/about"><img class='header-logo' src="img/logo.png"></a>
+</ion-nav-buttons>
+</ion-nav-bar>
+
+<ion-content class="back">
+
+<ion-refresher pulling-text="Desliza para refrescar" on-refresh="refreshTasks()"
+refreshing-text="Cargando..." refreshing-icon="ion-loading-b"
+></ion-refresher>
+
+<div ng-controller="GetTweets">
+  <div id="tweet_card" class="card" ng-repeat="tweet in tweets | emoji:this">
+    <div class="item item-text-wrap">
+     <div class="row">
+      <div class="col-20">
+      <a ng-click="showImage(tweet.avatar)">
+        <img src="{{tweet.avatar}}" class="avatar">
+        </a>
+      </div>
+      <div class="col-80">
+        <div class="row">
+          <h2 class="username"><a href="#">{{tweet.first_name}} {{tweet.last_name}}</a></h2>
+        </div>
+        <div class="row">
+          <h4 class="fecha">{{tweet.date}}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <p class="estado" ng-bind-html="tweet.message"></p>
+    </div>
+
+    <div ng-switch on="tweet.image">
+      <div ng-switch-when="">
+
+      </div>
+      <div ng-switch-default >
+          <a ng-click="showImage(tweet.image)">
+              <img src="{{tweet.image}}" class="img-tweet">
+          </a>
+      </div>
+    </div>
+
+    <div ng-switch on="tweet.link">
+      <div ng-switch-when="">
+
+      </div>
+      <div ng-switch-default style="text-align: right;">
+        <a href="#" ng-click="openURL(tweet.link)"><button class="button news">Ver Noticia</button></a>
+      </div>
+    </div>
+  </div>
+  <div class="row " style="font-size: 12px; font-weight: 400;">
+     <div class="col-50 center">
+        <a href="#" class="subdued">{{tweet.count_likes}} Like</a>
+      </div>
+      <div class="col-50 center">
+        <a href="#" class="subdued">{{tweet.count_comments}} Comentarios</a>
+      </div>
+     </div>
+  <div class="item item-divider">
+    <div class="row card-bottom">
+      <div class="col-50 center" ng-app="starter">
+        <button class="button icon-left ion-ios-heart-outline like grow" on-like="ion-ios-heart calm grow click" off-like="ion-ios-heart-outline grow click" like-switcher like-watcher ng-click="LikeClick()">Like</button>
+      </div>
+      <div class="col-50 center">
+        <button class="button icon-left ion-chatbox-working" change-zero ng-click="get_comments(tweet.id_tweet, user[0].id)" id="btnComment" >Comentar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script id="image-modal.html" type="text/ng-template">
+              <div class="modal image-modal transparent" ng-click="closeModal()">
+                  <ion-pane class="transparent">
+                     <img ng-src="{{imageSrc}}" class="fullscreen-image"/>
+                  </ion-pane>
+              </div>
+          </script>
+</ion-content>
+</ion-view>

@@ -1,0 +1,15 @@
+<ion-view view-title="Perfil" align-title="center">
+  <ion-content>
+  <div id="profile-bg"></div>
+      <div id="content">
+        <div id="profile-info">
+          <div class="crop">
+              <img id="profile-image" src="{{user[0].avatar}}">
+          </div>
+          <span id="profile-name">{{user[0].first_name}} {{user[0].last_name}}</span>
+          <br>
+          <span id="profile-description">{{user[0].cell_number}}</span>
+        </div>
+      </div>
+  </ion-content>
+</ion-view>

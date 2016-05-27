@@ -1,0 +1,49 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view cache-view="false" view-title="Nuevo Tweet">
+<ion-nav-buttons side="right">
+<button class="button" form="tweet_form">
+  <i class="icon ion-android-send"></i>
+</button>
+</ion-nav-buttons>
+<ion-content class="padding" scroll="false">
+<div ng-controller="GetUser">
+  <div class="row">
+    <div class="col">
+      <img src="{{user[0].avatar}}" width="35">
+    </div>
+    <div class="col col-90">
+      <div class="row">
+        <h4 class="username"><a href="#">{{user[0].first_name}} {{user[0].last_name}}</a></h4>
+      </div>
+    </div>
+  </div>
+  <form id="tweet_form" ng-submit="submit(obj)">
+    <input type="hidden" id="user_id" name="user_id" ng-model="obj.user_id" value="{{user[0].id}}" />
+    <label class="item item-input item-stacked-label">
+      <span class="input-label"><b>Mensaje</b></span>
+      <textarea id="message" name="message" ng-model="obj.message" rows="5" placeholder="Escriba un mensaje corto..." data-emojiable="true" maxlength="256" ng-maxlength="256" style="text-align: justify; font-size: 18px !important;"></textarea>
+    </label>
+  </form>
+</div>
+<div>
+</div>
+<ion-footer-bar keyboard-attach class="bar-stable">
+  <div class="col" style="padding-top: 0">
+    <button class="button" ng-click="showPopup()">
+      <i class="icon ion-link positive" link-off="ion-link" link-off="ion-link positive"></i>
+    </button>
+  </div>
+
+  <!--<div class="col" style="padding-top: 0">
+    <button class="button" ng-click="openPhotoLibrary()">
+      <i class="icon ion-image"></i>
+    </button>-->
+  </div>
+</ion-footer-bar>
+</ion-content>
+</ion-view>

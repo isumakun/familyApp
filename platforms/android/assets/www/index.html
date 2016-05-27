@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title></title>
+
+
+  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/hamburger_anim.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+  -->
+
+  <script src="js/jquery.js"></script>
+
+  <!-- ionic/angularjs js -->
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="cordova.js"></script>
+  <script src="lib/ngCordova/ng-cordova.min.js"></script>
+
+  <!-- your app's js -->
+  <script src="js/app.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/services.js"></script>
+
+  <link rel="stylesheet" href="lib/fullcalendar/dist/fullcalendar.css">
+<script type="text/javascript" src="lib/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="lib/angular-ui-calendar/src/calendar.js"></script>
+<script type="text/javascript" src="lib/fullcalendar/dist/fullcalendar.min.js"></script>
+<script type="text/javascript" src="lib/fullcalendar/dist/gcal.js"></script>
+<script type="text/javascript" src="lib/fullcalendar/dist/es.js"></script>
+<script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
+
+<script src="js/hammer.min.js"></script>
+</head>
+<body ng-app="starter" class="platform-android platform-cordova platform-webview">
+
+  <ion-nav-bar class="bar-positive" align-title="center">
+  <ion-nav-back-button class="button-clear">
+  <i class="ion-arrow-left-c"></i> Back
+</ion-nav-back-button>
+</ion-nav-bar>
+    <!--
+      The views will be rendered in the <ion-nav-view> directive below
+      Templates are in the /templates folder (but you could also
+      have templates inline in this html file if you'd like).
+    -->
+    <ion-nav-view animation="slide-left-right"></ion-nav-view>
+
+    <script id="templates/hiperlink.html" type="text/ng-template">
+      <input type="text" ng-model="data.link" required placeholder="Ingrese el link" id="tweet_link">
+      <div role="alert">
+        <span class="error" ng-show="input.$error.data">
+          Not valid url!</span>
+        </div>
+      </script>
+
+      <script id="templates/event.html" type="text/ng-template">
+      <center>
+        <img src="{{currentEvent.imageurl}}" width="100"><br>
+        <p>{{currentEvent.title}}</p>
+      </center>
+      </script>
+
+      <script type="text/ng-template" id="templates/comments.html">
+
+        <ion-modal-view class="product edit create">
+
+        <ion-header-bar class="bar-positive fix-buttons">
+        <a class="button" ng-click="closeModalCom()">Cancelar</a>
+        <h1 class="title">Comentarios</h1>
+      </ion-header-bar>
+
+      <ion-content has-bouncing="true">
+      <div id="wrapper">
+
+        <div id="cont">
+          <div ng-switch on="comments">
+      <div ng-switch-when="">
+          <center><h4 style="color: grey">No hay comentarios</h4></center>
+      </div>
+      <div ng-switch-default >
+          <div class="" ng-repeat="comments in comments | emojiComment:this">
+              <div class="item item-text-wrap comment">
+               <div class="row no-pad">
+               <a href="#" class="close" commentWatcher >x</a>
+                <div class="row card-bottom">
+                  <div class="col col-20">
+                    <a ng-click="showImage(comments.avatar)">
+                      <img src="{{comments.avatar}}" class="avatar">
+                    </a>
+                  </div>
+                  <div class="col col-80">
+                    <div class="inline">
+                      <div class="row">
+                          <h2 class="username"><a href="#">{{comments.first_name}} {{comments.last_name}}</a></h2>
+                      </div>
+                      <div class="row">
+                        <h5 style="color: grey">{{comments.date}}</h5>
+                      </div>
+                      <div class="row" style="max-width: 100%">
+                        <p class="estado giveMeEllipsis" ng-bind-html="comments.comment"></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div><!-- #content -->
+
+      <div id="footer" keyboard-attach>
+      <form id="comment_form" ng-submit="submit_comment(obj)">
+      <div class="item item-input">
+        <input type="hidden" id="user_id" name="user_id" ng-model="obj.user_id" value="{{comments[0].user_id}}" />
+        <input type="hidden" id="tweet_id" name="tweet_id" ng-model="obj.tweet_id" value="{{comments[0].tweet_id}}" />
+        <input type="text" required="" id="inputComment" maxlength="250" ng-maxlength="250" placeholder="Escriba un comentario..." ng-model="obj.comment"></input>
+        <button class="button button-positive">
+          <i class="icon ion-android-send"></i>
+        </button>
+        </div>
+        </form>
+
+      </div><!-- #footer -->
+
+    </div><!-- #wrapper -->
+
+
+
+  </ion-content>
+</ion-modal-view>
+</script>
+
+</body>
+</html>

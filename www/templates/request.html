@@ -1,0 +1,23 @@
+<ion-view cache-view="false" view-title="Solicitud de Usuario" class="request">
+<ion-content class="padding" scroll="false">
+<div ng-controller="RequestCtrl">
+  <form ng-submit="sendRequest(data)">
+      <div class="list list-inset no-bg">
+          <center>
+            <img src="img/icon.png" width="120">
+            </center>
+            <br>
+          <label class="item item-input trans" style="margin-bottom: 5px">
+              <input type="text" required placeholder="Nombre" ng-model="data.first_name" class="white cap">
+          </label>
+          <label class="item item-input trans">
+              <input type="text" required placeholder="Apellido" ng-model="data.last_name" class="white cap">
+          </label>
+      </div>
+      <button  class="button button-block button-positive request-btn" type="submit">Solicitar</button>
+  </form>
+</div>
+<div>
+</div>
+</ion-content>
+</ion-view>
